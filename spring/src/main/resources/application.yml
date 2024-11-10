@@ -1,0 +1,35 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/study
+    username: root
+    password: Felix1924!
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  sql:
+    init:
+      mode: never
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        show_sql: true
+        format_sql: true
+        use_sql_comments: true
+        hbm2ddl:
+          auto: update
+        default_batch_fetch_size: 1000
+
+
+
+#spring:
+#  datasource:
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://localhost:3306/umc7th
+#    username: root    # 데이터베이스 사용자 이름
+#    password: Felix1924!      # 데이터베이스 사용자 비밀번호
+#  jpa:
+#    hibernate:
+#      ddl-auto: update      # 자동으로 테이블을 생성하거나 업데이트
+#    properties:
+#      hibernate:
+#        dialect: org.hibernate.dialect.MySQLDialect  # MySQL 방언 설정
+#    show-sql: true          # 콘솔에 SQL 쿼리 출력
