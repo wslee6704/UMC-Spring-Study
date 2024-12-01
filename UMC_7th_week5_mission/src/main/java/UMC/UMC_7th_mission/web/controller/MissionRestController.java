@@ -12,6 +12,7 @@ import UMC.UMC_7th_mission.web.dto.MemberMissionDTO.MemberMissionRequestDTO;
 import UMC.UMC_7th_mission.web.dto.MemberMissionDTO.MemberMissionResponseDTO;
 import UMC.UMC_7th_mission.web.dto.MissionDTO.MissionRequestDTO;
 import UMC.UMC_7th_mission.web.dto.MissionDTO.MissionResponseDTO;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,7 +26,7 @@ public class MissionRestController {
     @PostMapping("/")
     public ApiResponse<MissionResponseDTO.CreateMissionResultDTO> createMission(
             @RequestParam Long storeId,
-            @RequestBody MissionRequestDTO.CreateMissionDTO request
+            @RequestBody @Valid MissionRequestDTO.CreateMissionDTO request
     ){
         Mission mission = missionCommandService.createMission(storeId, request);
         return ApiResponse.onSuccess(MissionConverter.toCreateResultDTO(mission));

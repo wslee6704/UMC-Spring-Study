@@ -9,7 +9,6 @@ import java.time.LocalDate;
 public class MemberMissionRequestDTO {
     @Getter
     public static class CreateMemberMissionDTO {
-        @NotBlank
         MissionStatus status;
     }
 }
