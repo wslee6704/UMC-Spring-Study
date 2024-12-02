@@ -3,6 +3,7 @@ package UMC.UMC_7th_mission.domain;
 import UMC.UMC_7th_mission.domain.common.BaseEntity;
 import UMC.UMC_7th_mission.domain.enums.Gender;
 import UMC.UMC_7th_mission.domain.enums.MemberStatus;
+import UMC.UMC_7th_mission.domain.enums.Role;
 import UMC.UMC_7th_mission.domain.enums.SocialType;
 import UMC.UMC_7th_mission.mapping.MemberAgree;
 import UMC.UMC_7th_mission.mapping.MemberMission;
@@ -55,6 +56,12 @@ public class Member extends BaseEntity {
 //  @Column(nullable = false, length = 50) 소셜 로그인 없이 하는 중이라 이메일은 nullable로 바꾸고 진행하겠습니다.
     private String email;
 
+    @Column(nullable = false)
+    private String password;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
     @ColumnDefault("0")
     private Integer point;
 
@@ -69,4 +76,8 @@ public class Member extends BaseEntity {
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<MemberMission> memberMissionList = new ArrayList<>();
+
+    public void encodePassword(String password) {
+        this.password = password;
+    }
 }
