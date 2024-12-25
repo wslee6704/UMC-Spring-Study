@@ -1,2 +1,1 @@
-# Spring-Boot
-${team name}
+# UMC_7th_week5_mission
