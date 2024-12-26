@@ -75,49 +75,79 @@ tasks.named('test') {
 	useJUnitPlatform()
 }
 
-// Querydsl 설정부
-def generated = 'src/main/generated'
+def querydslDir = "src/main/generated"
 
-// querydsl QClass 파일 생성 위치를 지정
-tasks.withType(JavaCompile) {
-	options.getGeneratedSourceOutputDirectory().set(file(generated))
-}
-
-// java source set 에 querydsl QClass 위치 추가
 sourceSets {
-	main.java.srcDirs += [ generated ]
+	main.java.srcDirs += [ querydslDir ]
 }
 
-// gradle clean 시에 QClass 디렉토리 삭제
+tasks.withType(JavaCompile) {
+	options.annotationProcessorGeneratedSourcesDirectory = file(querydslDir)
+}
+
+clean.doLast {
+	file(querydslDir).deleteDir()
+}
+
 clean {
-	delete file(generated)
+	delete fileTree(dir: 'src/main/generated', include: '**/*.java')
+}
+tasks.withType(JavaCompile) {
+	options.compilerArgs += [
+			'--add-opens',
+			'java.base/java.lang=ALL-UNNAMED',
+			'--add-opens',
+			'java.base/java.util=ALL-UNNAMED'
+	]
 }
 
-// Heroku 설정
-jar {
-	manifest {
-		attributes('Main-Class': 'com.fastcampus.projectboard.FastCampusProjectBoardApplication')
-	}
-}
-
+//tasks.named('test') {
+//	useJUnitPlatform()
+//}
+//
 //// Querydsl 설정부
 //def generated = 'src/main/generated'
 //
-//querydsl {
-//	jpa = true
-//	querydslSourcesDir = generated
+//// querydsl QClass 파일 생성 위치를 지정
+//tasks.withType(JavaCompile) {
+//	options.getGeneratedSourceOutputDirectory().set(file(generated))
 //}
+//
+//// java source set 에 querydsl QClass 위치 추가
 //sourceSets {
-//	main.java.srcDir generated
+//	main.java.srcDirs += [ generated ]
 //}
 //
-//compileQuerydsl{
-//	options.annotationProcessorPath = configurations.querydsl
+//// gradle clean 시에 QClass 디렉토리 삭제
+//clean {
+//	delete file(generated)
 //}
 //
-//configurations {
-//	compileOnly {
-//		extendsFrom annotationProcessor
+//// Heroku 설정
+//jar {
+//	manifest {
+//		attributes('Main-Class': 'com.fastcampus.projectboard.FastCampusProjectBoardApplication')
 //	}
-//	querydsl.extendsFrom compileClasspath
 //}
+//
+////// Querydsl 설정부
+////def generated = 'src/main/generated'
+////
+////querydsl {
+////	jpa = true
+////	querydslSourcesDir = generated
+////}
+////sourceSets {
+////	main.java.srcDir generated
+////}
+////
+////compileQuerydsl{
+////	options.annotationProcessorPath = configurations.querydsl
+////}
+////
+////configurations {
+////	compileOnly {
+////		extendsFrom annotationProcessor
+////	}
+////	querydsl.extendsFrom compileClasspath
+////}
