@@ -24,7 +24,8 @@ public class TempRestController {
 
     @GetMapping("/exception")
     public ApiResponse<TempResponse.TempExceptionDTO> exceptionAPI(@RequestParam Integer flag){
-        tempQueryService.CheckFlag(flag);
+        tempQueryService.CheckFlag(flag);//service의 메소드를 사용하고, 여기서 exception이 발생하면 return이 되지 않는듯
+
         return ApiResponse.onSuccess(TempConverter.toTempExceptionDTO(flag));
     }
 }

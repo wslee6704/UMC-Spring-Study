@@ -48,7 +48,7 @@ package umc.spring.domain;
 
         private LocalDate inactiveDate;
 
-        @Column(nullable = false, length = 50)
+        @Column(nullable = true, length = 50)
         private String email;
 
         @Column(columnDefinition = "INTEGER DEFAULT 0")
