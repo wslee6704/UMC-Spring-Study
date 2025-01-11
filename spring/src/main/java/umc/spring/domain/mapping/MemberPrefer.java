@@ -10,6 +10,7 @@ import umc.spring.domain.common.BaseEntity;
 @Entity
 @Builder
 @Getter
+@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class MemberPrefer extends BaseEntity {
@@ -32,5 +33,6 @@ public class MemberPrefer extends BaseEntity {
         this.member = member;
         member.getMemberPreferList().add(this);
     }
-    
+
+
 }
