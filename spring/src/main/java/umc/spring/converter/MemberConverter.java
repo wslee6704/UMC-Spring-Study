@@ -41,7 +41,7 @@ public class MemberConverter {
                 .specAddress(request.getSpecAddress())
                 .gender(gender)
                 .name(request.getName())
-                .memberPreferList(new ArrayList<>())
+                .memberPreferList(new ArrayList<>())//이렇게 초기화하래
                 .build();
     }
 }
